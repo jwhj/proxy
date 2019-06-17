@@ -9,14 +9,15 @@ import (
 	"net/http"
 )
 
-var MID_SERVER_LOCAL_SIDE = "localhost:8080"
-var MID_SERVER_REMOTE_SIDE = "localhost:8081"
-var SERVER = "http://localhost:8082/"
+var MID_SERVER = ""
+var MID_SERVER_LOCAL_SIDE = ":8080"
+var MID_SERVER_REMOTE_SIDE = ":8081"
+var SERVER = "http://localhost:8082"
 
 func handle(l net.Conn) {
 	defer l.Close()
-	var l1, _ = net.Dial("tcp", MID_SERVER_LOCAL_SIDE)
-	var req, _ = http.NewRequest("GET", SERVER, bytes.NewBufferString(MID_SERVER_REMOTE_SIDE))
+	var l1, _ = net.Dial("tcp", MID_SERVER+MID_SERVER_LOCAL_SIDE)
+	var req, _ = http.NewRequest("GET", SERVER, bytes.NewBufferString(MID_SERVER+MID_SERVER_REMOTE_SIDE))
 	var client = &http.Client{}
 	var res, _ = client.Do(req)
 	defer res.Body.Close()

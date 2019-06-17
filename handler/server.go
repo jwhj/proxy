@@ -23,7 +23,7 @@ func H(w http.ResponseWriter, r *http.Request) {
 		}
 		defer client.Close()
 
-		var b [1024]byte
+		var b [65536]byte
 		n, err := client.Read(b[:])
 		// fmt.Println(string(b[:n]))
 		if err != nil {
